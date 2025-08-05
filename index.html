@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>您的博客名</title>
+    
+    <!-- 设计与样式的核心，全部内嵌在此 -->
+    <style>
+        /* 根变量定义，方便切换主题 */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #212121;
+            --link-color: #0070f3;
+            --meta-color: #666666;
+            --border-color: #eaeaea;
+        }
+
+        /* 暗黑模式颜色变量 */
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --link-color: #58a6ff;
+            --meta-color: #999999;
+            --border-color: #333333;
+        }
+
+        /* 全局样式与字体设定 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            margin: 0;
+        }
+
+        /* 主内容容器，限制阅读宽度 */
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* 顶部导航 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        header a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        /* 主页文章列表 */
+        #home-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #home-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #home-list h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        #home-list a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.2s;
+        }
+        
+        #home-list a:hover {
+            color: var(--link-color);
+        }
+
+        #home-list time {
+            font-size: 0.9rem;
+            color: var(--meta-color);
+        }
+        
+        /* 文章页面的样式 */
+        .post-content {
+            padding-top: 2rem;
+        }
+        
+        .post-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content .meta {
+            color: var(--meta-color);
+            margin-bottom: 2rem;
+        }
+
+        .post-content p {
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+        }
+        
+        .post-content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px solid;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 3rem;
+            text-decoration: none;
+            color: var(--link-color);
+        }
+
+        /* 魔法部分：CSS :target 伪类，实现单页面内的页面切换 */
+        /* 默认隐藏所有文章 */
+        .post {
+            display: none;
+        }
+
+        /* 当URL的哈希值匹配到某个文章的ID时，显示该文章，并隐藏主页列表 */
+        .post:target {
+            display: block;
+        }
+
+        .post:target ~ #home-list {
+            display: none;
+        }
+        
+        /* 主题切换按钮 */
+        #theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 页面头部：博客名和主题切换按钮 -->
+        <header>
+            <h1><a href="#">您的博客名</a></h1>
+            <button id="theme-toggle" title="切换主题">🌓</button>
+        </header>
+
+        <main>
+            <!-- ====================================================================== -->
+            <!-- 文章内容区：在这里添加您的文章 -->
+            <!-- 每一篇文章都是一个 <article> 标签 -->
+            <!-- ====================================================================== -->
+
+            <!-- 文章1：模板 -->
+            <article id="post-1" class="post">
+                <div class="post-content">
+                    <h1>这里是文章一的标题</h1>
+                    <p class="meta"><time datetime="2025-08-08">2025年8月8日</time></p>
+                    <p>这是文章的第一段。设计的核心在于保持简洁，让读者能够完全专注于您想要传达的文字和思想。每一段都应该有足够的呼吸空间。</p>
+                    <p>这是第二段。您可以自由地添加任意数量的段落。链接的样式也经过了精心设计，<a href="#" target="_blank">就像这样</a>，清晰而不突兀。</p>
+                    <a href="#" class="back-to-home">← 返回主页</a>
+                </div>
+            </article>
+
+            <!-- 文章2：模板 -->
+            <article id="post-2" class="post">
+                <div class="post-content">
+                    <h1>这里是文章二的标题</h1>
+                    <p class="meta"><time datetime="2025-08-01">2025年8月1日</time></p>
+                    <p>这是第二篇文章的内容。您只需要复制上面的 `<article>` 结构，修改 `id` (例如 `post-3`)，然后修改标题和内容即可创建一篇新文章。</p>
+                    <a href="#" class="back-to-home">← 返回主页</a>
+                </div>
+            </article>
+            
+            <!-- ====================================================================== -->
+            <!-- 主页列表区：在这里添加文章链接 -->
+            <!-- 每一篇文章都需要在这里添加一个 <li> 条目 -->
+            <!-- ====================================================================== -->
+            
+            <section id="home-list">
+                <ul>
+                    <!-- 文章1的链接 -->
+                    <li>
+                        <a href="#post-1">
+                            <h2>这里是文章一的标题</h2>
+                        </a>
+                        <time datetime="2025-08-08">2025年8月8日</time>
+                    </li>
+                    
+                    <!-- 文章2的链接 -->
+                    <li>
+                        <a href="#post-2">
+                            <h2>这里是文章二的标题</h2>
+                        </a>
+                        <time datetime="2025-08-01">2025年8月1日</time>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- 主题切换的JavaScript脚本 -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // 页面加载时，检查本地存储是否有主题偏好
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+        }
+
+        // 按钮点击事件
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', ''); // 或者 'light-mode'
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
